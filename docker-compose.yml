@@ -1,0 +1,9 @@
+version: '3'
+services:
+  converter:
+    build: ./docker/converter
+    user: $SUDO_UID:$SUDO_GID
+    volumes:
+      - "./input:/home/app/input"
+      - "./output:/home/app/output"
+    command: ["mogrify", "-format", "png", "-path", "./output", "-monitor", "./input/*"]
